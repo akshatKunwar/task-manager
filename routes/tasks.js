@@ -101,7 +101,7 @@ router.delete('/tasks/:id', auth, async (req, res) => {
 });
 
 // GET /api/tasks/upcoming - Get upcoming tasks
-router.get('/upcoming', authMiddleware, async (req, res) => {
+router.get('/upcoming', auth, async (req, res) => {
     try {
       const today = new Date();
       const nextWeek = new Date();

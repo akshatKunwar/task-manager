@@ -7,11 +7,6 @@ import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 import notificationRoutes from './routes/notifications.js';
 
-app.use('/api', taskRoutes(io));
-
-
-dotenv.config();
-
 const app = express();
 const server = http.createServer(app);
 const io = new SocketIO(server, {
@@ -20,6 +15,9 @@ const io = new SocketIO(server, {
         methods: ["GET", "POST"],
     },
 });
+
+app.use('/api', taskRoutes(io));
+dotenv.config();
 
 // Middleware
 app.use(express.json());
@@ -46,5 +44,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api', taskRoutes);
 app.use('/api', notificationRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
